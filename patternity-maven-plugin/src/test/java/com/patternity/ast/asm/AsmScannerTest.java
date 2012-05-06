@@ -10,13 +10,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
+import com.patternity.ast.*;
 import org.junit.Test;
 
-import com.patternity.ast.AnnotationElement;
-import com.patternity.ast.ClassElement;
-import com.patternity.ast.ClassHandler;
-import com.patternity.ast.DependenciesCollector;
-import com.patternity.ast.FieldElement;
 import com.patternity.data.domain.Epic1;
 import com.patternity.data.domain.Epic2;
 import com.patternity.data.domain.Epic3;
@@ -236,6 +232,21 @@ public class AsmScannerTest {
 		scan(StoryRepository.class);
 		assertThat(scannedClass.getSuperQualifiedName(), //
 				equalTo("com/patternity/data/service/RepositoryBase"));
+	}
+
+  @Test
+	public void userId1_method() throws IOException {
+		scan(User1.class);
+		assertThat(scannedClass, notNullValue());
+
+		List<MethodElement> methodModels = scannedClass.getMethods();
+		assertThat(methodModels, notNullValue());
+    //Constructor is a method
+		assertThat(methodModels.size(), equalTo(2));
+
+		MethodElement methodModel = methodModels.get(1);
+		assertThat(methodModel.getName(), equalTo("getUserId"));
+    assertThat(methodModel.getSignature(), equalTo("getUserId()Lcom/patternity/data/domain/User1$Id;"));
 	}
 
 	private void assertThatAllDependenciesMatch(String... dependencies) {

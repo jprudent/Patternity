@@ -85,7 +85,7 @@ public class ClassVisitorAdapter implements ClassVisitor {
                                      final String[] exceptions) {
         logger.debug("Visiting class method <{}> <{}>", name, desc);
 
-        MethodElement model = new MethodElement(name);
+        MethodElement model = new MethodElement(name,desc);
         AsmUtils.applyModifiers(model.getModifiers(), access);
 
         MethodVisitor methodVisitor = context.enterMethod(model);
