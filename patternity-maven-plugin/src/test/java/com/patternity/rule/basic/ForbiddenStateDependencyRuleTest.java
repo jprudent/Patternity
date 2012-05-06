@@ -3,9 +3,7 @@ package com.patternity.rule.basic;
 import static com.patternity.usecase.TestUsecases.scanClass;
 import static java.util.Arrays.asList;
 import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,7 +38,7 @@ public class ForbiddenStateDependencyRuleTest {
 		when(context.isMarked(same(classModel), same(VALUE_OBJECT))).thenReturn(true);
 
 		rule.verify(classModel, context);
-		verify(context, never()).reportViolation(rule, "never happened");
+		verify(context, never()).reportViolation(eq(rule), anyString());
 	}
 
 	@Test
@@ -49,7 +47,7 @@ public class ForbiddenStateDependencyRuleTest {
 		when(context.isMarked(same(classModel), same(VALUE_OBJECT))).thenReturn(true);
 
 		rule.verify(classModel, context);
-		verify(context, never()).reportViolation(rule, "never happened");
+		verify(context, never()).reportViolation(eq(rule), anyString());
 	}
 
 	@Test
