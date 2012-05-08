@@ -66,7 +66,7 @@ public class OverrideEqualsRuleTest {
 
     rule.verify(equalsNotOverridden, context);
     verify(context).isMarked(equalsNotOverridden, VALUE_OBJECT);
-    verify(context).reportViolation(eq(rule), eq("equals is not overridden"));
+    verify(context).reportViolation(eq(rule), eq("equals(Ljava/lang/Object;)Z is not overridden"));
   }
 
   @Test
@@ -76,7 +76,7 @@ public class OverrideEqualsRuleTest {
 
     rule.verify(equalsOverloaded, context);
     verify(context).isMarked(equalsOverloaded, VALUE_OBJECT);
-    verify(context).reportViolation(eq(rule), eq("equals is not overridden"));
+    verify(context).reportViolation(eq(rule), eq("equals(Ljava/lang/Object;)Z is not overridden"));
   }
 
 
